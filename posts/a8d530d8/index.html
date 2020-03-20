@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>初学Git | Rinah Teng&#39;s paradise</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#E6ACCA">
+    
+    
+    <meta name="keywords" content="Git">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="我的练习地址：D: \learngit\node.txt  Git的诞生 Git是用C语言开发的； Git是分布式版本控制系统：没有“中央服务器”、不需要联网、安全性高很多（每个人电脑里都有完整的版本库）； Git有极其强大的分支管理。  安装Git后创建版本库（又名仓库，repository）选择一个合适的地方，创建一个空目录：  $ cd D:&#x2F; &#x2F;&#x2F; 切换盘符，我这里进入D盘   $ cd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初学Git">
+<meta property="og:url" content="http://tomotoes.com/posts/a8d530d8/index.html">
+<meta property="og:site_name" content="Rinah Teng&#39;s paradise">
+<meta property="og:description" content="我的练习地址：D: \learngit\node.txt  Git的诞生 Git是用C语言开发的； Git是分布式版本控制系统：没有“中央服务器”、不需要联网、安全性高很多（每个人电脑里都有完整的版本库）； Git有极其强大的分支管理。  安装Git后创建版本库（又名仓库，repository）选择一个合适的地方，创建一个空目录：  $ cd D:&#x2F; &#x2F;&#x2F; 切换盘符，我这里进入D盘   $ cd">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://tomotoes.com/posts/a8d530d8/TIM%E6%88%AA%E5%9B%BE20200311155827.png">
+<meta property="og:image" content="http://tomotoes.com/posts/a8d530d8/1.png">
+<meta property="og:image" content="http://tomotoes.com/posts/a8d530d8/2.png">
+<meta property="og:image" content="http://tomotoes.com/posts/a8d530d8/3.png">
+<meta property="og:image" content="http://tomotoes.com/posts/a8d530d8/4.png">
+<meta property="og:image" content="http://tomotoes.com/posts/a8d530d8/5.png">
+<meta property="og:image" content="http://tomotoes.com/posts/a8d530d8/6.png">
+<meta property="article:published_time" content="2020-03-12T02:12:21.000Z">
+<meta property="article:modified_time" content="2020-03-20T10:26:19.896Z">
+<meta property="article:author" content="Cardiac Dejavu">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tomotoes.com/posts/a8d530d8/TIM%E6%88%AA%E5%9B%BE20200311155827.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Rinah Teng&#39;s paradise" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">Cardiac Dejavu</h5>
+          
+            <div id="mymotto" class="motto"></div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="mailto:993397125@qq.com" target="_parent"title="Email" >
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/Da0sy" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Weibo" href="https://weibo.com/6277484069/profile?topnav=1&wvr=6" target="_blank"title="Weibo" >
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">初学Git</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Git的诞生"><span class="post-toc-number">1.</span> <span class="post-toc-text">Git的诞生</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装Git后创建版本库（又名仓库，repository）"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装Git后创建版本库（又名仓库，repository）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时光机穿梭"><span class="post-toc-number">3.</span> <span class="post-toc-text">时光机穿梭</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-版本回退"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">2.1 版本回退</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-工作区与暂存区"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.2 工作区与暂存区</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-管理修改（详见1-创建版本库中的命令）"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">2.3 管理修改（详见1. 创建版本库中的命令）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-撤销修改"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">2.4 撤销修改</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-删除文件"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">2.5 删除文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#远程仓库"><span class="post-toc-number">4.</span> <span class="post-toc-text">远程仓库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-添加远程库"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">3.1 添加远程库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-从远程库克隆"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">3.2 从远程库克隆</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分支管理"><span class="post-toc-number">5.</span> <span class="post-toc-text">分支管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-创建与合并分支"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">4.1 创建与合并分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-解决冲突"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">4.2 解决冲突</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-分支管理策略"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">4.3 分支管理策略</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-Bug分支"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">4.4 Bug分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-5-Feature分支"><span class="post-toc-number">5.5.</span> <span class="post-toc-text">4.5 Feature分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-6-多人协作（最好结合工作场景理解）"><span class="post-toc-number">5.6.</span> <span class="post-toc-text">4.6 多人协作（最好结合工作场景理解）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-7-Rebase"><span class="post-toc-number">5.7.</span> <span class="post-toc-text">4.7 Rebase</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标签管理"><span class="post-toc-number">6.</span> <span class="post-toc-text">标签管理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用GitHub"><span class="post-toc-number">7.</span> <span class="post-toc-text">使用GitHub</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用码云（与GitHub类似，用到的时候，再注册使用练习，毕竟GitHub更加NB一些！）"><span class="post-toc-number">8.</span> <span class="post-toc-text">使用码云（与GitHub类似，用到的时候，再注册使用练习，毕竟GitHub更加NB一些！）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义Git（这里只是简单入门）"><span class="post-toc-number">9.</span> <span class="post-toc-text">自定义Git（这里只是简单入门）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-1-忽略特殊文件"><span class="post-toc-number">9.1.</span> <span class="post-toc-text">8.1 忽略特殊文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-2-配置别名"><span class="post-toc-number">9.2.</span> <span class="post-toc-text">8.2 配置别名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-3-搭建Git服务器"><span class="post-toc-number">9.3.</span> <span class="post-toc-text">8.3 搭建Git服务器</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-初学Git"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">初学Git</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2020-03-12 10:12:21" datetime="2020-03-12T02:12:21.000Z"  itemprop="datePublished">2020-03-12</time>
+
+            <br id="mybreak"/>
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">14</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>我的练习地址：D: \learngit\node.txt</p>
+<hr>
+<h2 id="Git的诞生"><a href="#Git的诞生" class="headerlink" title="Git的诞生"></a>Git的诞生</h2><ul>
+<li>Git是用<strong>C语言</strong>开发的；</li>
+<li>Git是<strong>分布式</strong>版本控制系统：没有“中央服务器”、不需要联网、安全性高很多（每个人电脑里都有完整的版本库）；</li>
+<li>Git有极其强大的<strong>分支管理</strong>。</li>
+</ul>
+<h2 id="安装Git后创建版本库（又名仓库，repository）"><a href="#安装Git后创建版本库（又名仓库，repository）" class="headerlink" title="安装Git后创建版本库（又名仓库，repository）"></a>安装Git后创建版本库（又名仓库，repository）</h2><p>选择一个合适的地方，创建一个空目录：</p>
+<blockquote>
+<p>$ cd D:/ // 切换盘符，我这里进入D盘</p>
+</blockquote>
+<blockquote>
+<p>$ cd .. // 回到文件上一层(注: cd与..中间有个空格)</p>
+</blockquote>
+<blockquote>
+<p>$ cd ~ // 回到当前目录的主目录</p>
+</blockquote>
+<blockquote>
+<p>$ mkdir Git // 创建文件夹Git</p>
+</blockquote>
+<blockquote>
+<p>$ touch fileName // 新建文件</p>
+</blockquote>
+<blockquote>
+<p>$ vi fileName // 编辑文件</p>
+</blockquote>
+<blockquote>
+<p>$  press i button // 开始进入编辑状态</p>
+</blockquote>
+<blockquote>
+<p>$ press the Esc button // 退出vim编辑区（一直按住ESC，按两次大写的Z；或者按ESC键然后输入::q!即可不保存退出）</p>
+</blockquote>
+<blockquote>
+<p>$ :wq // 退出编辑状态, 回到命令窗口（这是保存退出）</p>
+</blockquote>
+<blockquote>
+<p>$ mkdir learngit // 创建文件夹learngit（我的在D盘中创建） </p>
+</blockquote>
+<blockquote>
+<p>$ pwd // 显示当前路径/e/Git/learngit</p>
+</blockquote>
+<blockquote>
+<p>$ git init // 将当前目录变成一个Git可以管理的仓库</p>
+</blockquote>
+<blockquote>
+<p>$ touch+文件名 // 直接新建一个文件（node.txt）</p>
+</blockquote>
+<blockquote>
+<p>$ git add node.txt // 将文件node.txt添加到Git仓库（把文件修改添加到暂存区）</p>
+</blockquote>
+<blockquote>
+<p>$ git commit -m “wrote a node.txt.” // 将文件提交到仓库（把暂存区的所有内容提交到当前分支）,命令执行成功会告诉你1 file changed: 1个文件被改动（我们新添加的node.txt文件）；2 insertions: 插入了两行内容（node.txt有两行内容）。</p>
+</blockquote>
+<blockquote>
+<p>$ git add file1.txt // 添加file1.txt文件</p>
+</blockquote>
+<blockquote>
+<p>$ git add file2.txt file3.txt // 同时添加file2.txt和file3.txt两个文件（可多次）</p>
+</blockquote>
+<blockquote>
+<p>$ git commit -m “add 3 files.” // 一次性提交3个文件（commit可以一次提交很多文件）</p>
+</blockquote>
+<h2 id="时光机穿梭"><a href="#时光机穿梭" class="headerlink" title="时光机穿梭"></a>时光机穿梭</h2><blockquote>
+<h3 id="2-1-版本回退"><a href="#2-1-版本回退" class="headerlink" title="2.1 版本回退"></a>2.1 版本回退</h3></blockquote>
+<blockquote>
+<p>$ git status // 查看当前仓库状态（仓库下的工作区文件是否被修改过）</p>
+</blockquote>
+<blockquote>
+<p>$ git diff readme.txt // 查看工作区的node.txt与缓存区的node.txt的区别</p>
+</blockquote>
+<blockquote>
+<p>$ git log // 查看最近到最远的提交记录（详情: commit id + Author + Date + comment）</p>
+</blockquote>
+<blockquote>
+<p>$ git log –pretty=oneline // 如果嫌输出信息太多，可以试试查看最近到最远的提交记录（简写：commit id + comment）。看到的一大串类似10c7e…的是commit id(版本号)</p>
+</blockquote>
+<blockquote>
+<p>$ git reset –hard HEAD^ // 回到上一个版本（HEAD: 当前版本，HEAD^: 上一个版本，HEAD^^: 上上一个版本，HEAD~100: 往上100个版本）</p>
+</blockquote>
+<blockquote>
+<p>$ git reset –hard 1234567 // 回到指定版本号commit id（此处：commit id 假设为1234567<strong>**</strong>，版本号不需要写全，Git会根据commit id的前几位自动寻找对应的版本）</p>
+</blockquote>
+<blockquote>
+<p>$ cat readme.txt // 查看readme.txt的内容</p>
+</blockquote>
+<blockquote>
+<p>$ git reflog // 查看每一次命令记录历史，确保能回到任意版本　　</p>
+</blockquote>
+<blockquote>
+<h3 id="2-2-工作区与暂存区"><a href="#2-2-工作区与暂存区" class="headerlink" title="2.2 工作区与暂存区"></a>2.2 工作区与暂存区</h3></blockquote>
+<blockquote>
+<p>$ git diff readme.txt // 比较工作区（working directory）和暂存区（stage/index）的区别；工作区即电脑里能看到的目录，例如learngit文件夹。</p>
+</blockquote>
+<blockquote>
+<p><strong>版本库</strong>：工作区有一个隐藏目录<strong>.git</strong>，这个不算是工作区，而是Git的版本库。<br>Git的版本库里存了很多东西，最重要的就是<strong>stage</strong>（或叫index）的<strong>暂存区</strong>，还有Git为我们自动创建的第一个分支<strong>master</strong>，以及指向master的一个指针叫<strong>HEAD</strong>。</p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./TIM截图20200311155827.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure><br>前面讲了我们把文件往Git版本库里添加的时候，是分两步执行的：<br>第一步是用git add把文件添加进去，实际上就是把文件修改添加到<strong>暂存区</strong>；<br>第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到<strong>当前分支</strong>。<br>因为我们创建Git版本库时，Git自动为我们创建了唯一一个master分支，所以，现在，git commit就是往master分支上提交更改。<br>你可以简单理解为，需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。<p></p>
+</blockquote>
+<blockquote>
+<p>$ git diff –cached // 比较暂存区（stage/index）和分支（master）的区别</p>
+</blockquote>
+<blockquote>
+<h3 id="2-3-管理修改（详见1-创建版本库中的命令）"><a href="#2-3-管理修改（详见1-创建版本库中的命令）" class="headerlink" title="2.3 管理修改（详见1. 创建版本库中的命令）"></a>2.3 管理修改（详见1. 创建版本库中的命令）</h3></blockquote>
+<blockquote>
+<h3 id="2-4-撤销修改"><a href="#2-4-撤销修改" class="headerlink" title="2.4 撤销修改"></a>2.4 撤销修改</h3></blockquote>
+<blockquote>
+<p>$ git checkout – node.txt // 撤销修改：1. 文件在添加到缓存区前修改，则回退到原工作区状态；2. 文件在添加到缓存区后修改，则回退到原缓存区状态。也即是将node.txt撤回到最近一次git add或git commit状态（注：–表示在当前分支，如果没有，则切换到另一个分支）</p>
+</blockquote>
+<blockquote>
+<p>$ cat node.txt // 查看文件内容</p>
+</blockquote>
+<blockquote>
+<p>$ git reset HEAD node.txt // 1. 回退到最新版本；2. 将暂存区的修改回退到工作区</p>
+</blockquote>
+<blockquote>
+<h3 id="2-5-删除文件"><a href="#2-5-删除文件" class="headerlink" title="2.5 删除文件"></a>2.5 删除文件</h3></blockquote>
+<blockquote>
+<p>$ rm test.txt // 删除工作区文件（类似于手动删除）</p>
+</blockquote>
+<blockquote>
+<p>$ git status // 查看当前工作区与缓存区状态</p>
+</blockquote>
+<blockquote>
+<p>$ git rm test.txt // 情况1：确认删除</p>
+</blockquote>
+<blockquote>
+<p>$ git commit -m “remove test.txt” // 情况1：确认删除后，提交到版本库</p>
+</blockquote>
+<blockquote>
+<p>$ git checkout – test.txt // 情况2：误删，需要回退（即：用版本库里的版本替换工作区的版本）</p>
+</blockquote>
+<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>注册GitHub账号（因为你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以需要创建SSH kEY）:</p>
+<ul>
+<li>创建SSH Key。在用户主目录下，看看有没有<strong>.ssh</strong>目录，如果有，再看看这个目录下有没有<strong>id_rsa</strong>(私钥，不能泄露）和<strong>id_rsa.pub</strong>（公钥）这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开<strong>Git Bash</strong>），创建SSH Key：<blockquote>
+<p>$  ssh-keygen -t rsa -C “<a href="mailto:youremail@example.com">youremail@example.com</a>“</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>把邮件地址换成自己的邮件地址，一路回车，使用默认值即可。</li>
+<li>登录GitHub，打开<strong>“Account settings”</strong>，<strong>“SSH Keys”</strong>页面；<br>然后，点<strong>“Add SSH Key”</strong>，填上任意Title，在Key文本框里粘贴<strong>id_rsa.pub</strong>文件的内容；<br>点<strong>“Add Key”</strong>，你就应该看到已经添加的Key，这样就在本地创建了一个Git仓库，要想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。</li>
+</ul>
+<p>首先，登陆GitHub，点击右上角<strong>“Create a new repo”</strong>按钮，创建一个新的仓库；<br>在<strong>Repository name</strong>填入learngit，其他保持默认设置，点击<strong>“Create repository”</strong>按钮，就成功地创建了一个新的Git仓库；<br>目前，在GitHub上的这个learngit仓库还是空的，GitHub告诉我们，可以从这个仓库克隆出新的仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到GitHub仓库。</p>
+<blockquote>
+<h3 id="3-1-添加远程库"><a href="#3-1-添加远程库" class="headerlink" title="3.1 添加远程库"></a>3.1 添加远程库</h3><p>$ git remote add origin git@server-name:path/repo-name.git<br>// 关联一个远程仓库，如： git remote add origin <a href="mailto:git@github.com">git@github.com</a>:GitHub用户名/learngit.git</p>
+<p>// 添加后，远程库的名字就是origin，这是Git默认的叫法，也可以改成别的，但是origin这个名字一看就知道是远程库。</p>
+<p>下一步，就可以把本地库的所有内容推送到远程库上：<br>git push -u origin master // 第一次推送master分支的所有内容<br><strong>注：</strong>在GitHub上创建新仓库时，如果勾选了README.md选项时，可能会出现下面错误，提示：远程仓库有readme.txt,而本地仓库没有README.txt,此时应该先进行合并文件，再进行推送。</p>
+</blockquote>
+<blockquote>
+<p>$ git pull –rebase origin master // 推送之前，进行合并</p>
+<p>合并文件之后，发现本地仓库中多了README.md文件，此时再进行推送修改到远程仓库就可以了。</p>
+<p>再次执行：git push -u origin master, 即可推送本地仓库到远程仓库了</p>
+<p>$ git push origin master // 以后每次本地修改更新后，推送最新修改</p>
+</blockquote>
+<h3 id="3-2-从远程库克隆"><a href="#3-2-从远程库克隆" class="headerlink" title="3.2 从远程库克隆"></a>3.2 从远程库克隆</h3><p>假设我们从零开发，那么最好的方式是先创建远程库，然后，从远程库克隆。<br>首先，登陆GitHub，创建一个新的仓库，名字叫<strong>gitskills</strong>，勾选<strong>Initialize this repository with a README</strong>，这样GitHub会自动为我们创建一个<strong>README.md</strong>文件。创建完毕后，可以看到README.md文件：</p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./1.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure><p></p>
+<blockquote>
+<p>$ git clone <a href="mailto:git@github.com">git@github.com</a>:Da0sy/gitskills.git  // 以SSH方式克隆一个本地库，默认的git://使用ssh，但也可使用https等协议，看以下这种方式：</p>
+<p>$ git clone <a href="https://github.com/Da0sy/gitskills.git" target="_blank" rel="noopener">https://github.com/Da0sy/gitskills.git</a> // 以Https协议方式克隆<br>然后进入gitskills目录看，已经有README.md文件了。但这种方式没有上一种快。</p>
+</blockquote>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><p>在版本回退里，你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即<font color="red"> master </font>分支。<font color="red"> HEAD </font>严格来说不是指向提交，而是指向<font color="red"> master </font>，<font color="red"> master </font>才是指向提交的，所以，<font color="red"> HEAD </font>指向的就是当前分支。</p>
+<p>一开始的时候，<font color="red"> master </font>分支是一条线，<font color="red"> Git </font>用<font color="red"> master </font>指向最新的提交，再用<font color="red"> HEAD </font>指向<font color="red"> master </font>，就能确定当前分支，以及当前分支的提交点：</p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./2.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure><p></p>
+<p>每次提交，<font color="red"> master </font>分支都会向前移动一步，这样，随着你不断提交，<font color="red"> master </font>分支的线也越来越长。</p>
+<p>当我们创建新的分支，例如<font color="red"> dev </font>时，<font color="red"> Git </font>新建了一个指针叫<font color="red"> dev </font>，指向<font color="red"> master </font>相同的提交，再把<font color="red"> HEAD </font>指向<font color="red"> dev </font>，就表示当前分支在<font color="red"> dev </font>上：</p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./3.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure><p></p>
+<p><font color="red"> Git </font>创建一个分支很快，除了增加一个<font color="red"> dev </font>指针，改改<font color="red"> HEAD </font>的指向，工作区的文件都没有任何变化！</p>
+<p>不过，从现在开始，对工作区的修改和提交就是针对<font color="red"> dev </font>分支了，比如新提交一次后，<font color="red"> dev </font>指针往前移动一步，而<font color="red"> master </font>指针不变：</p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./4.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure><p></p>
+<p>假如我们在<font color="red"> dev </font>上的工作完成了，就可以把<font color="red"> dev </font>合并到<font color="red"> master </font>上。<font color="red"> Git </font>怎么合并呢？最简单的方法，就是直接把<font color="red"> master </font>指向<font color="red"> dev </font>的当前提交，就完成了合并：</p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./5.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure><p></p>
+<p>合并完分支后，甚至可以删除<font color="red"> dev </font>分支。删除<font color="red"> dev </font>分支就是把<font color="red"> dev </font>指针给删掉，删掉后，我们就剩下了一条<font color="red"> master </font>分支：</p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./6.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure><p></p>
+<h3 id="4-1-创建与合并分支"><a href="#4-1-创建与合并分支" class="headerlink" title="4.1 创建与合并分支"></a>4.1 创建与合并分支</h3><blockquote>
+<p>git branch // 查看所有分支（当前分支以‘*’标记）</p>
+</blockquote>
+<blockquote>
+<p>git branch name // 创建分支（如：git branch dev）</p>
+</blockquote>
+<blockquote>
+<p>git checkout name 或者git switch name// 切换分支  </p>
+</blockquote>
+<blockquote>
+<p>git checkout -b name 或者git switch -c name// 创建切换分支（如：git checkout -b dev）</p>
+</blockquote>
+<blockquote>
+<p>git merge name // 合并分支(name)到当前分支上</p>
+</blockquote>
+<blockquote>
+<p>git branch -d name // 删除该分支</p>
+</blockquote>
+<h3 id="4-2-解决冲突"><a href="#4-2-解决冲突" class="headerlink" title="4.2 解决冲突"></a>4.2 解决冲突</h3><blockquote>
+<p>git log –graph // 查看分支合并图</p>
+</blockquote>
+<blockquote>
+<p>git log –graph –pretty=oneline –abbrev-commit // 查看分支合并缩略图</p>
+</blockquote>
+<h3 id="4-3-分支管理策略"><a href="#4-3-分支管理策略" class="headerlink" title="4.3 分支管理策略"></a>4.3 分支管理策略</h3><blockquote>
+<p> git merge –no-ff -m “注释” dev // 合并后的分支有历史记录，而Fast-Forward合并之后，分支没有历史记录</p>
+</blockquote>
+<h3 id="4-4-Bug分支"><a href="#4-4-Bug分支" class="headerlink" title="4.4 Bug分支"></a>4.4 Bug分支</h3><blockquote>
+<p>git stash // 隐藏分支工作现场，为修复bug准备</p>
+</blockquote>
+<blockquote>
+<p>git stash list // 查看有哪些分支隐藏的工作现场，为恢复工作现场做准备</p>
+</blockquote>
+<blockquote>
+<p>git stash apply // 恢复工作现场，但不删除存储的stash内容，结合git stash drop进行删除</p>
+</blockquote>
+<blockquote>
+<p>git stash drop // 删除存储的stash内容，恢复到隐藏前的工作现场</p>
+</blockquote>
+<blockquote>
+<p>git stash pop // 恢复到隐藏前的工作现场，相当于git stash apply和git stash drop</p>
+</blockquote>
+<blockquote>
+<p>git stash apply stash@{0} // 可以多次stash，通过git stash list查看所有的stash，然后可以恢复到指定的隐藏的工作现场</p>
+</blockquote>
+<h3 id="4-5-Feature分支"><a href="#4-5-Feature分支" class="headerlink" title="4.5 Feature分支"></a>4.5 Feature分支</h3><blockquote>
+<p>注：当添加一个feature时，最好新建一个分支：git checkout -b name</p>
+</blockquote>
+<blockquote>
+<p>git branch -D name // 强行删除一个没有被合并到主分支的分支</p>
+</blockquote>
+<h3 id="4-6-多人协作（最好结合工作场景理解）"><a href="#4-6-多人协作（最好结合工作场景理解）" class="headerlink" title="4.6 多人协作（最好结合工作场景理解）"></a>4.6 多人协作（最好结合工作场景理解）</h3><blockquote>
+<p>git remote -v // 查看远程库详细信息</p>
+</blockquote>
+<blockquote>
+<p>git push origin dev // push本地dev分支到远程dev</p>
+</blockquote>
+<blockquote>
+<p>git push origin master // push本地master分支到远程master（时刻保持同步）</p>
+</blockquote>
+<blockquote>
+<p>git pull // 将最新的pull/dev(master)爬下来</p>
+</blockquote>
+<blockquote>
+<p>git checkout -b branch-name origin/branch-name // 在本地创建和远程分支对应的分支</p>
+</blockquote>
+<blockquote>
+<p>git branch –set-upstream-to=origin/branch-name dev // 建立本地分支和远程分支的关联</p>
+</blockquote>
+<h3 id="4-7-Rebase"><a href="#4-7-Rebase" class="headerlink" title="4.7 Rebase"></a>4.7 Rebase</h3><blockquote>
+<p>git rebase // 将本地未push的分支提交整理成直线，利于查看</p>
+</blockquote>
+<h2 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h2><blockquote>
+<p>git tag tagname // 创建标签</p>
+</blockquote>
+<blockquote>
+<p>git tag // 查看所有标签</p>
+</blockquote>
+<blockquote>
+<p>git tag tagname commitId // 为某次提交创建指定标签</p>
+</blockquote>
+<blockquote>
+<p>git show tagname // 查看指定标签具体内容</p>
+</blockquote>
+<blockquote>
+<p>git tag -a tagname -m “v0.1 released” commitId // 为某次指定的提交创建标签，同时添加标签注释</p>
+</blockquote>
+<blockquote>
+<p>git tag -d tagname // 删除某个标签</p>
+</blockquote>
+<blockquote>
+<p>git push origin tagname // 推送某个标签到远程库</p>
+</blockquote>
+<blockquote>
+<p>git push origin –tags // 一次性推送所有标签到远程库</p>
+</blockquote>
+<blockquote>
+<p>git tag -d v0.9 // 删除远程库标签（第一步：删除本地库标签）</p>
+</blockquote>
+<blockquote>
+<p>git push origin :refs/tags/v0.9 // 删除远程库标签（第二步：从远程库删除标签）</p>
+</blockquote>
+<h2 id="使用GitHub"><a href="#使用GitHub" class="headerlink" title="使用GitHub"></a>使用GitHub</h2><blockquote>
+<p>在GitHub上，可以自己fork任意开源仓库，自己拥有fork后的仓库的读与写操作权限，可以推送pull request给官方仓库贡献代码。</p>
+</blockquote>
+<h2 id="使用码云（与GitHub类似，用到的时候，再注册使用练习，毕竟GitHub更加NB一些！）"><a href="#使用码云（与GitHub类似，用到的时候，再注册使用练习，毕竟GitHub更加NB一些！）" class="headerlink" title="使用码云（与GitHub类似，用到的时候，再注册使用练习，毕竟GitHub更加NB一些！）"></a>使用码云（与GitHub类似，用到的时候，再注册使用练习，毕竟GitHub更加NB一些！）</h2><h2 id="自定义Git（这里只是简单入门）"><a href="#自定义Git（这里只是简单入门）" class="headerlink" title="自定义Git（这里只是简单入门）"></a>自定义Git（这里只是简单入门）</h2><blockquote>
+<p>git config –global color.ui true // 让Git显示颜色</p>
+</blockquote>
+<h3 id="8-1-忽略特殊文件"><a href="#8-1-忽略特殊文件" class="headerlink" title="8.1 忽略特殊文件"></a>8.1 忽略特殊文件</h3><blockquote>
+<p>忽略某些文件时，需要编写.gitignore文件，文件本身要放到版本库中，Git可以对.gitignore做版本管理！（注：不需要从头写.gitignore文件，GitHub已经为我们准备了各种配置文件，只需要组合一下就可以使用了。所有配置文件可以直接在线浏览：<a href="https://github.com/github/gitignore）" target="_blank" rel="noopener">https://github.com/github/gitignore）</a></p>
+</blockquote>
+<h3 id="8-2-配置别名"><a href="#8-2-配置别名" class="headerlink" title="8.2 配置别名"></a>8.2 配置别名</h3><blockquote>
+<p>git config –global alias.st status // 将st作为status的别名，以后就可以git st查看暂存区与工作区的状态了（还有类似co:checkout, ci:commit, br:branch，–global:是针对于当前用户起作用的，如果不加，则只针对于当前仓库）</p>
+</blockquote>
+<blockquote>
+<p>cat .gitignore // 查看当前文件所有配置信息（包括别名信息）</p>
+</blockquote>
+<h3 id="8-3-搭建Git服务器"><a href="#8-3-搭建Git服务器" class="headerlink" title="8.3 搭建Git服务器"></a>8.3 搭建Git服务器</h3><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-20T10:26:19.896Z" itemprop="dateUpdated">2020-03-20 18:26:19</time>
+</span>
+
+
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://tomotoes.com'">
+            <img src="/img/avatar.jpg" alt="Cardiac Dejavu">
+            <a>Cardiac Dejavu</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tomotoes.com/posts/a8d530d8/&title=《初学Git》 — Rinah Teng's paradise&pic=http://tomotoes.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tomotoes.com/posts/a8d530d8/&title=《初学Git》 — Rinah Teng's paradise&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tomotoes.com/posts/a8d530d8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《初学Git》 — Rinah Teng's paradise&url=http://tomotoes.com/posts/a8d530d8/&via=http://tomotoes.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tomotoes.com/posts/a8d530d8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/7ab8779e/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：Vue2.0 【第一季】第1节 走进我的Vue2.0
+        </h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2020
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://tomotoes.com">Da0sy.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license noopener" rel="external nofollow noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/img/Daisy.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tomotoes.com/posts/a8d530d8/&title=《初学Git》 — Rinah Teng's paradise&pic=http://tomotoes.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tomotoes.com/posts/a8d530d8/&title=《初学Git》 — Rinah Teng's paradise&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tomotoes.com/posts/a8d530d8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《初学Git》 — Rinah Teng's paradise&url=http://tomotoes.com/posts/a8d530d8/&via=http://tomotoes.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tomotoes.com/posts/a8d530d8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwUlEQVR42u3aQY7DIBAEwPz/01lpr6tY3QwmXqk4+ZBA4cMIevx6xeP9O/4+t//6O153DFxc3DH3fTk+EZPFPv3m0/zRlnBxcQ9yJ8Xr02byV5AYcHFxn8m9XmxtS7i4uP+dm1xj8mdcXNzncxNEezVqZ9h8V8PFxR1wJ4HprudD+S4uLu64K5GXnvqYsrQ6Li7uGW4eaiTL5CFIchiKlsfFxT3ObeOPSUu12CouLu5B7vVEyQJr4UjbwsHFxT3DbctZ3nbd9ZHW6KCDi4u7xF37eKL9MGutcYuLi/tdbhJ/tBHJdTlbfEG4uLg3c9tLy9qW8kPPhvwGFxd3zE3CiCSkyMPWtWgVFxf3JHfXcWTSMimuQLi4uEe4yXFk0mhZ22QbyuDi4t7HzRuf9e7Li9Co84OLi7uV27Y32s+52g8vojKHi4t7Mzc/jiQRah2AloUPFxf3Pu67HPNtrIUmuLi4J7m7ritrpSopebi4uN/iJsWrLUA5N5kHFxf3W9y2obI5+lxLbnBxcR/DvS5/7YUnL6C4uLjP5CbTtf+qL1G4uLgHuUlBya8o+Tx16wUXF/cIdx6YzoOSSSMHFxd3K/cHcahXrqk3KGIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2020/03/19");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+    elasticText({
+        id: "mymotto",
+        duration: 100,
+        effact: "easeOut",
+        content: ""
+    });
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "Cardiac Dejavu");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

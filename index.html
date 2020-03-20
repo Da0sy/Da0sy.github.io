@@ -188,6 +188,648 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-Vue2-0-【第四季】第3节-实例事件"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/68775ecc/">Vue2-0-【第四季】第3节-实例事件</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-03-20 18:46:46" datetime="2020-03-20T10:46:46.000Z"  itemprop="datePublished">2020-03-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="Vue2-0-【第四季】第3节-实例事件"><a href="#Vue2-0-【第四季】第3节-实例事件" class="headerlink" title="Vue2.0 【第四季】第3节 实例事件"></a>Vue2.0 【第四季】第3节 实例事件</h1><hr>
+<h2 id="第3节-实例事件"><a href="#第3节-实例事件" class="headerlink" title="第3节 实例事件"></a>第3节 实例事件</h2><p>实例事件就是在构造器外部写一个调用构造器内部的方法。这样写的好处是可以通过这种写法在构造器外部调用构造器内部的数据。</p>
+<p>我们还是写一个点击按钮，持续加1的例子。</p>
+<h3 id="一、-on-在构造器外部添加事件"><a href="#一、-on-在构造器外部添加事件" class="headerlink" title="一、$on 在构造器外部添加事件"></a>一、$on 在构造器外部添加事件</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.$on('reduce',function(){</span><br><span class="line">    console.log('执行了reduce()');</span><br><span class="line">    this.num--;</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
+
+<p>$on接收两个参数，第一个参数是调用时的事件名称，第二个参数是一个匿名方法。</p>
+<p>如果按钮在作用域外部，可以利用$emit来执行。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//外部调用内部事件</span><br><span class="line">function reduce(){</span><br><span class="line">    app.$emit('reduce');</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>全部代码：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span><br><span class="line">    &lt;title&gt;example03&lt;/title&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/vue.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;example03&lt;/h1&gt;</span><br><span class="line">        &lt;hr&gt;</span><br><span class="line">        &lt;div id="app"&gt;</span><br><span class="line">			{％raw％} </span><br><span class="line">            {{num}}</span><br><span class="line">			{％endraw％}</span><br><span class="line">            &lt;p&gt;&lt;button @click="add"&gt;add&lt;/button&gt;&lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;p&gt;&lt;button onclick="reduce()"&gt;reduce&lt;/button&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">        &lt;script type="text/javascript"&gt;</span><br><span class="line">            var app = new Vue({</span><br><span class="line">                el:'#app',</span><br><span class="line">                data:{</span><br><span class="line">                    num:1</span><br><span class="line">                },</span><br><span class="line">                methods:{</span><br><span class="line">                    add:function(){</span><br><span class="line">                        this.num++;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            });</span><br><span class="line"></span><br><span class="line">            app.$on("reduce",function(){</span><br><span class="line">                console.log("执行了reduce方法");</span><br><span class="line">                this.num--;</span><br><span class="line">            })</span><br><span class="line"></span><br><span class="line">            function reduce(){</span><br><span class="line">                app.$emit('reduce');</span><br><span class="line">            }</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./1.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+<h3 id="二、-once执行一次的事件"><a href="#二、-once执行一次的事件" class="headerlink" title="二、$once执行一次的事件"></a>二、$once执行一次的事件</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.$once('reduceOnce',function(){</span><br><span class="line">    console.log('只执行一次的方法');</span><br><span class="line">    this.num--;</span><br><span class="line"></span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
+
+<p>全部代码：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span><br><span class="line">    &lt;title&gt;example03&lt;/title&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/vue.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;example03&lt;/h1&gt;</span><br><span class="line">        &lt;hr&gt;</span><br><span class="line">        &lt;div id="app"&gt;</span><br><span class="line">            {％raw％} </span><br><span class="line">            {{num}}</span><br><span class="line">			{％endraw％}</span><br><span class="line">            &lt;p&gt;&lt;button @click="add"&gt;add&lt;/button&gt;&lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;p&gt;&lt;button onclick="reduce()"&gt;reduce&lt;/button&gt;&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;&lt;button onclick="reduceOnce()"&gt;reduceOnce&lt;/button&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">        &lt;script type="text/javascript"&gt;</span><br><span class="line">            var app = new Vue({</span><br><span class="line">                el:'#app',</span><br><span class="line">                data:{</span><br><span class="line">                    num:1</span><br><span class="line">                },</span><br><span class="line">                methods:{</span><br><span class="line">                    add:function(){</span><br><span class="line">                        this.num++;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            });</span><br><span class="line"></span><br><span class="line">            app.$on("reduce",function(){</span><br><span class="line">                console.log("执行了reduce方法");</span><br><span class="line">                this.num--;</span><br><span class="line">            })</span><br><span class="line"></span><br><span class="line">            app.$once('reduceOnce',function(){</span><br><span class="line">                console.log('只执行一次的方法');</span><br><span class="line">                this.num--;</span><br><span class="line"></span><br><span class="line">            });</span><br><span class="line"></span><br><span class="line">            function reduce(){</span><br><span class="line">                app.$emit('reduce');</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            function reduceOnce(){</span><br><span class="line">                app.$emit('reduceOnce');</span><br><span class="line">            }</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./2.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+<h3 id="三、-off关闭事件"><a href="#三、-off关闭事件" class="headerlink" title="三、$off关闭事件"></a>三、$off关闭事件</h3><p>···<br>//关闭事件<br>function off(){<br>   app.$off(‘reduce’);<br>}<br>···</p>
+<p>全部代码：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span><br><span class="line">    &lt;title&gt;example03&lt;/title&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/vue.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;example03&lt;/h1&gt;</span><br><span class="line">        &lt;hr&gt;</span><br><span class="line">        &lt;div id="app"&gt;</span><br><span class="line">            {％raw％} </span><br><span class="line">            {{num}}</span><br><span class="line">			{％endraw％}</span><br><span class="line">            &lt;p&gt;&lt;button @click="add"&gt;add&lt;/button&gt;&lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;p&gt;&lt;button onclick="reduce()"&gt;reduce&lt;/button&gt;&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;&lt;button onclick="reduceOnce()"&gt;reduceOnce&lt;/button&gt;&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;&lt;button onclick="off()"&gt;off&lt;/button&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">        &lt;script type="text/javascript"&gt;</span><br><span class="line">            var app = new Vue({</span><br><span class="line">                el:'#app',</span><br><span class="line">                data:{</span><br><span class="line">                    num:1</span><br><span class="line">                },</span><br><span class="line">                methods:{</span><br><span class="line">                    add:function(){</span><br><span class="line">                        this.num++;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            });</span><br><span class="line"></span><br><span class="line">            app.$on("reduce",function(){</span><br><span class="line">                console.log("执行了reduce方法");</span><br><span class="line">                this.num--;</span><br><span class="line">            })</span><br><span class="line"></span><br><span class="line">            app.$once('reduceOnce',function(){</span><br><span class="line">                console.log('只执行一次的方法');</span><br><span class="line">                this.num--;</span><br><span class="line"></span><br><span class="line">            });</span><br><span class="line"></span><br><span class="line">            function reduce(){</span><br><span class="line">                app.$emit('reduce');</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            function reduceOnce(){</span><br><span class="line">                app.$emit('reduceOnce');</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            //关闭事件</span><br><span class="line">            function off(){</span><br><span class="line">                app.$off('reduce');</span><br><span class="line">            }</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./3.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/posts/68775ecc/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Vue2-0-【第四季】第4节-内置组件-slot讲解"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/bc1fc6de/">Vue2-0-【第四季】第4节-内置组件-slot讲解</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-03-20 18:45:02" datetime="2020-03-20T10:45:02.000Z"  itemprop="datePublished">2020-03-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="Vue2-0-【第四季】第4节-内置组件-slot讲解"><a href="#Vue2-0-【第四季】第4节-内置组件-slot讲解" class="headerlink" title="Vue2.0 【第四季】第4节 内置组件 -slot讲解"></a>Vue2.0 【第四季】第4节 内置组件 -slot讲解</h1><hr>
+<h2 id="第4节-内置组件-slot讲解"><a href="#第4节-内置组件-slot讲解" class="headerlink" title="第4节 内置组件 -slot讲解"></a>第4节 内置组件 -slot讲解</h2><p>slot是标签的内容扩展，也就是说：你用slot就可以在自定义组件时传递给组件内容，组件接收内容并输出。</p>
+<p>先来定义一个<code>&lt;da0sy&gt;&lt;/da0sy&gt;</code>的组件，这个组件用来显示博主的一些信息。</p>
+<p>我们在Vue 构造器里的<strong>data</strong>中给出了信息，信息如下：（博客地址，网名，使用技能）</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">data:{</span><br><span class="line">    da0syData:{</span><br><span class="line">        bolgUrl:'https://www.cnblogs.com/Elva3zora/',</span><br><span class="line">        netName:'da0sy',</span><br><span class="line">        skill:'Web前端'</span><br><span class="line">    }</span><br><span class="line">},</span><br></pre></td></tr></tbody></table></figure>
+
+<p>我们用<code>&lt;template&gt;&lt;/template&gt;</code>标签的方式定义了组件：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;template id="tmp"&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;p&gt;博客地址：&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;网名：&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;技术类型：&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>我们现在就可以用slot功能让组件接收传递过来的值，并在模板中接收显示。</p>
+<p>slot的使用需要两步： </p>
+<ul>
+<li><p>1、在HTML的组件中用slot属性传递值。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;da0sy&gt;</span><br><span class="line">	&lt;span slot="blogUrl"&gt;{{da0syData.blogUrl}}&lt;/span&gt;  //传递</span><br><span class="line">    &lt;span slot="netName"&gt;{{da0syData.netName}}&lt;/span&gt;</span><br><span class="line">    &lt;span slot="skill"&gt;{{da0syData.skill}}&lt;/span&gt;</span><br><span class="line">&lt;/da0sy&gt;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>2、在组件模板中用标签接收值。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;template id="tep"&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	    &lt;p&gt;博客地址：&lt;slot name="blogUrl"&gt;&lt;/slot&gt;&lt;/p&gt;  //接收</span><br><span class="line">        &lt;p&gt;网名：&lt;slot name="netName"&gt;&lt;/slot&gt;&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;技术类型：&lt;slot name="skill"&gt;&lt;/slot&gt;&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<p>我们贴出这个案例的全部代码：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span><br><span class="line">    &lt;title&gt;Slot content extend Demo&lt;/title&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/vue.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;Slot content extend Demo&lt;/h1&gt;</span><br><span class="line">        &lt;hr&gt;</span><br><span class="line">        &lt;div id="app"&gt;</span><br><span class="line">            &lt;da0sy&gt;</span><br><span class="line">                &lt;span slot="blogUrl"&gt;{{da0syData.blogUrl}}&lt;/span&gt;  //传递</span><br><span class="line">                &lt;span slot="netName"&gt;{{da0syData.netName}}&lt;/span&gt;</span><br><span class="line">                &lt;span slot="skill"&gt;{{da0syData.skill}}&lt;/span&gt;</span><br><span class="line">            &lt;/da0sy&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;template id="tep"&gt;</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;p&gt;博客地址：&lt;slot name="blogUrl"&gt;&lt;/slot&gt;&lt;/p&gt;  </span><br><span class="line">                &lt;p&gt;网名：&lt;slot name="netName"&gt;&lt;/slot&gt;&lt;/p&gt;</span><br><span class="line">                &lt;p&gt;技术类型：&lt;slot name="skill"&gt;&lt;/slot&gt;&lt;/p&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/template&gt;</span><br><span class="line"></span><br><span class="line">        &lt;script type="text/javascript"&gt;</span><br><span class="line">            var da0sy = {</span><br><span class="line">                template:"#tep"</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            var app = new Vue({</span><br><span class="line">                el:'#app',</span><br><span class="line">                data:{</span><br><span class="line">                    da0syData:{</span><br><span class="line">                        blogUrl:'https://www.cnblogs.com/Elva3zora/',</span><br><span class="line">                        netName:'Cardiac_Dejavu',</span><br><span class="line">                        skill:"web前端"</span><br><span class="line">                    }</span><br><span class="line">                },</span><br><span class="line">                components:{</span><br><span class="line">                    "da0sy":da0sy</span><br><span class="line">                }</span><br><span class="line">            })</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./4.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/posts/bc1fc6de/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Vue2-0-【第四季】第2节-实例方法"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/9530e9bf/">Vue2-0-【第四季】第2节-实例方法</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-03-20 18:43:23" datetime="2020-03-20T10:43:23.000Z"  itemprop="datePublished">2020-03-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="Vue2-0-【第四季】第2节-实例方法"><a href="#Vue2-0-【第四季】第2节-实例方法" class="headerlink" title="Vue2.0 【第四季】第2节 实例方法"></a>Vue2.0 【第四季】第2节 实例方法</h1><hr>
+<h2 id="第2节-实例方法"><a href="#第2节-实例方法" class="headerlink" title="第2节 实例方法"></a>第2节 实例方法</h2><h3 id="一、-mount方法"><a href="#一、-mount方法" class="headerlink" title="一、$mount方法"></a>一、$mount方法</h3><p>$mount方法是用来挂载我们的扩展的，我们先来复习一下扩展的写法。</p>
+<p>这里我们作了da0sy的扩展，然后用$mount的方法把da0sy挂载到DOM上，我们也生成了一个Vue的实例，直接看代码。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/vue.js"&gt;&lt;/script&gt;</span><br><span class="line">    &lt;title&gt;Examples Method Demo&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;Examples Method Demo&lt;/h1&gt;</span><br><span class="line">    &lt;hr&gt;</span><br><span class="line">    &lt;div id="app"&gt;</span><br><span class="line">        {{message}}</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script type="text/javascript"&gt;</span><br><span class="line">      var da0sy = Vue.extend({</span><br><span class="line">          template:`&lt;p&gt;{{message}}&lt;/p&gt;`,</span><br><span class="line">          data:function(){</span><br><span class="line">              return {</span><br><span class="line">                  message:'Hello ,I am da0sy'</span><br><span class="line">              }</span><br><span class="line">          }</span><br><span class="line">      })</span><br><span class="line">      var vm = new da0sy().$mount("#app")</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./3.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+<h3 id="二、-destroy-卸载方法"><a href="#二、-destroy-卸载方法" class="headerlink" title="二、$destroy()卸载方法"></a>二、$destroy()卸载方法</h3><p>用$destroy()进行卸载。</p>
+<p>我写了一个button按钮，点击后卸载整个挂载。</p>
+<p>html:</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&lt;button onclick="destroy()"&gt;卸载&lt;/button&gt;&lt;/p&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>js:</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function destroy(){</span><br><span class="line">   vm.$destroy();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>全部代码：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/vue.js"&gt;&lt;/script&gt;</span><br><span class="line">    &lt;title&gt;Examples Method Demo&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;Examples Method Demo&lt;/h1&gt;</span><br><span class="line">    &lt;hr&gt;</span><br><span class="line">    &lt;div id="app"&gt;</span><br><span class="line">        {{message}}</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;p&gt;&lt;button onclick="destroy()"&gt;卸载&lt;/button&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script type="text/javascript"&gt;</span><br><span class="line">      var da0sy = Vue.extend({</span><br><span class="line">          template:`&lt;p&gt;{{message}}&lt;/p&gt;`,</span><br><span class="line">          data:function(){</span><br><span class="line">              return {</span><br><span class="line">                  message:'Hello ,I am da0sy'</span><br><span class="line">              }</span><br><span class="line">          },</span><br><span class="line">          mounted:function(){</span><br><span class="line">            console.log("mounted 被创建！");</span><br><span class="line">          },</span><br><span class="line">          destroyed:function(){</span><br><span class="line">              console.log("destroy 销毁之后");</span><br><span class="line">          }</span><br><span class="line">      })</span><br><span class="line">      var vm = new da0sy().$mount("#app");</span><br><span class="line"></span><br><span class="line">      function destroy(){</span><br><span class="line">          vm.$destroy();</span><br><span class="line">      }</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./4.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>PS:$destroy()后边必须要有括号，没有括号是无用的。</p>
+<h3 id="三、-forceUpdate-更新方法"><a href="#三、-forceUpdate-更新方法" class="headerlink" title="三、$forceUpdate()更新方法"></a>三、$forceUpdate()更新方法</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.$forceUpdate();</span><br></pre></td></tr></tbody></table></figure>
+
+<p>全部代码：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/vue.js"&gt;&lt;/script&gt;</span><br><span class="line">    &lt;title&gt;Examples Method Demo&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;Examples Method Demo&lt;/h1&gt;</span><br><span class="line">    &lt;hr&gt;</span><br><span class="line">    &lt;div id="app"&gt;</span><br><span class="line">        {{message}}</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;p&gt;&lt;button onclick="destroy()"&gt;卸载&lt;/button&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;&lt;button onclick="reload()"&gt;刷新&lt;/button&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script type="text/javascript"&gt;</span><br><span class="line">      var da0sy = Vue.extend({</span><br><span class="line">          template:`&lt;p&gt;{{message}}&lt;/p&gt;`,</span><br><span class="line">          data:function(){</span><br><span class="line">              return {</span><br><span class="line">                  message:'Hello ,I am da0sy'</span><br><span class="line">              }</span><br><span class="line">          },</span><br><span class="line">          mounted:function(){</span><br><span class="line">            console.log("mounted 被创建！");</span><br><span class="line">          },</span><br><span class="line">          destroyed:function(){</span><br><span class="line">              console.log("destroy 销毁之后");</span><br><span class="line">          }</span><br><span class="line">      })</span><br><span class="line">      var vm = new da0sy().$mount("#app");</span><br><span class="line"></span><br><span class="line">      function destroy(){</span><br><span class="line">          vm.$destroy();</span><br><span class="line">      }</span><br><span class="line">      function reload(){</span><br><span class="line">          vm.$forceUpdate();</span><br><span class="line">      }</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./5.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+<h3 id="四、-nextTick-数据修改方法"><a href="#四、-nextTick-数据修改方法" class="headerlink" title="四、$nextTick()数据修改方法"></a>四、$nextTick()数据修改方法</h3><p>当Vue构造器里的data值被修改完成后会调用这个方法，相当于一个钩子函数，和构造器里的updated生命周期很像。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function tick(){</span><br><span class="line">    vm.message="update message info ";</span><br><span class="line">    vm.$nextTick(function(){</span><br><span class="line">        console.log('message更新完后我被调用了');</span><br><span class="line">    })</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>同样的：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/vue.js"&gt;&lt;/script&gt;</span><br><span class="line">    &lt;title&gt;Examples Method Demo&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;Examples Method Demo&lt;/h1&gt;</span><br><span class="line">    &lt;hr&gt;</span><br><span class="line">    &lt;div id="app"&gt;</span><br><span class="line">        {{message}}</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;p&gt;&lt;button onclick="destroy()"&gt;卸载&lt;/button&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;&lt;button onclick="reload()"&gt;刷新&lt;/button&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;&lt;button onclick="tick()"&gt;更改数据&lt;/button&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script type="text/javascript"&gt;</span><br><span class="line">      var da0sy = Vue.extend({</span><br><span class="line">          template:`&lt;p&gt;{{message}}&lt;/p&gt;`,</span><br><span class="line">          data:function(){</span><br><span class="line">              return {</span><br><span class="line">                  message:'Hello ,I am da0sy'</span><br><span class="line">              }</span><br><span class="line">          },</span><br><span class="line">          mounted:function(){</span><br><span class="line">            console.log("mounted 被创建！");</span><br><span class="line">          },</span><br><span class="line">          destroyed:function(){</span><br><span class="line">              console.log("destroy 销毁之后");</span><br><span class="line">          },</span><br><span class="line">          updated:function(){</span><br><span class="line">              console.log("update 更新之后");</span><br><span class="line">          }</span><br><span class="line">      })</span><br><span class="line">      var vm = new da0sy().$mount("#app");</span><br><span class="line"></span><br><span class="line">      function destroy(){</span><br><span class="line">          vm.$destroy();</span><br><span class="line">      }</span><br><span class="line">      function reload(){</span><br><span class="line">          vm.$forceUpdate();</span><br><span class="line">      }</span><br><span class="line"></span><br><span class="line">      function tick(){</span><br><span class="line">        vm.message="update message info ";</span><br><span class="line">        vm.$nextTick(function(){</span><br><span class="line">            console.log('message更新完后我被调用了');</span><br><span class="line">        })</span><br><span class="line">      }</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./6.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/posts/9530e9bf/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Vue2-0-【第四季】第1节-实例入门-实例属性"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/99aca906/">Vue2.0 【第四季】第1节 实例入门-实例属性</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-03-20 18:40:37" datetime="2020-03-20T10:40:37.000Z"  itemprop="datePublished">2020-03-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="Vue2-0-【第四季】第1节-实例入门-实例属性"><a href="#Vue2-0-【第四季】第1节-实例入门-实例属性" class="headerlink" title="Vue2.0 【第四季】第1节 实例入门-实例属性"></a>Vue2.0 【第四季】第1节 实例入门-实例属性</h1><hr>
+<h2 id="第1节-实例入门-实例属性"><a href="#第1节-实例入门-实例属性" class="headerlink" title="第1节 实例入门-实例属性"></a>第1节 实例入门-实例属性</h2><p>概述：实例就是在构造器外部操作构造器内部的属性选项或者方法，就叫做实例？实例的作用就是给原生的或者其他javascript框架一个融合的接口或者说是机会，让Vue和其他框架一起使用。</p>
+<h3 id="一、Vue和Jquery-js一起使用"><a href="#一、Vue和Jquery-js一起使用" class="headerlink" title="一、Vue和Jquery.js一起使用"></a>一、Vue和Jquery.js一起使用</h3><h4 id="下载并引入jQuery框架"><a href="#下载并引入jQuery框架" class="headerlink" title="下载并引入jQuery框架"></a>下载并引入jQuery框架</h4><p>下载可以去官网进行下载，我这里使用的版本是3.4.1，下载好后在需要的页面引入就可以了。当然你还有很多其它的方法引入jquery，只要可以顺利引入就可以了。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type="text/javascript" src="../assets/js/jquery-3.4.1.min.js"&gt;&lt;/script&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>试着做一个案例，在DOM被挂载后修改里边的内容：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span><br><span class="line">    &lt;title&gt;example methods Demo&lt;/title&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/vue.js"&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/jquery-3.4.1.min.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;example methods Demo&lt;/h1&gt;</span><br><span class="line">        &lt;hr&gt;</span><br><span class="line">        &lt;div id="app"&gt;</span><br><span class="line">            {{message}}</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;script type="text/javascript"&gt;</span><br><span class="line">            var app = new Vue({</span><br><span class="line">                el:'#app',</span><br><span class="line">                data:{</span><br><span class="line">                    message:'hello world!'</span><br><span class="line">                },</span><br><span class="line">                mounted:function(){</span><br><span class="line">                    $("#app").html('我是jQuery~！');</span><br><span class="line">                }</span><br><span class="line">            })</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./1.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>现在页面显示是：我是jQuery，而不是hello Vue了。</p>
+<h3 id="二、实例调用自定义方法"><a href="#二、实例调用自定义方法" class="headerlink" title="二、实例调用自定义方法"></a>二、实例调用自定义方法</h3><p>在Vue的构造器里我们写一个add方法，然后我们用实例的方法调用它。</p>
+<p>构造器里的add方法：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">methods:{</span><br><span class="line">    add:function(){</span><br><span class="line">        console.log("调用了ADD方法");</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>实例调用：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.add();</span><br></pre></td></tr></tbody></table></figure>
+
+<p>全部代码：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span><br><span class="line">    &lt;title&gt;example methods Demo&lt;/title&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/vue.js"&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script type="text/javascript" src="../assets/js/jquery-3.4.1.min.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;example methods Demo&lt;/h1&gt;</span><br><span class="line">        &lt;hr&gt;</span><br><span class="line">        &lt;div id="app"&gt;</span><br><span class="line">            {{message}}</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;script type="text/javascript"&gt;</span><br><span class="line">            var app = new Vue({</span><br><span class="line">                el:'#app',</span><br><span class="line">                data:{</span><br><span class="line">                    message:'hello world!'</span><br><span class="line">                },</span><br><span class="line">                mounted:function(){</span><br><span class="line">                    $("#app").html('我是jQuery~！');</span><br><span class="line">                },</span><br><span class="line">                methods:{</span><br><span class="line">                    add:function(){</span><br><span class="line">                        console.log("调用了构造器内部的ADD方法");</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            })</span><br><span class="line"></span><br><span class="line">            app.add();</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./2.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>PS：我们有可能把app.add()的括号忘记或省略，这时候我们得到的就是<strong>方法的字符串</strong>，但是并没有执行，所以必须要加上括号。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/posts/99aca906/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-ES6-第四节-扩展运算符和rest运算符"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/a0b5abf4/">ES6 第四节 扩展运算符和rest运算符</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-03-20 18:38:56" datetime="2020-03-20T10:38:56.000Z"  itemprop="datePublished">2020-03-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="ES6-第四节-扩展运算符和rest运算符"><a href="#ES6-第四节-扩展运算符和rest运算符" class="headerlink" title="ES6 第四节 扩展运算符和rest运算符"></a>ES6 第四节 扩展运算符和rest运算符</h1><p>@(ES6)[ES6]</p>
+<hr>
+<p>[toc]</p>
+<h2 id="第四节-扩展运算符和rest运算符"><a href="#第四节-扩展运算符和rest运算符" class="headerlink" title="第四节 扩展运算符和rest运算符"></a>第四节 扩展运算符和rest运算符</h2><p>扩展运算符和rest运算符，都是…（三个点）。它们可以很好的为我们解决<strong>参数</strong>和<strong>对象数组未知</strong>情况下的编程，让我们的代码更健壮和简洁。</p>
+<h3 id="对象扩展运算符（…）："><a href="#对象扩展运算符（…）：" class="headerlink" title="对象扩展运算符（…）："></a>对象扩展运算符（…）：</h3><p>当编写一个方法时，我们允许它传入的参数是不确定的。这时候可以<strong>使用对象扩展运算符来作参数</strong>，看一个简单的列子：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function da0sy(...arg){</span><br><span class="line">    console.log(arg[0]);</span><br><span class="line">    console.log(arg[1]);</span><br><span class="line">    console.log(arg[2]);</span><br><span class="line">    console.log(arg[3]);</span><br><span class="line">}</span><br><span class="line">da0sy(1,2,3);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这时我们看到控制台输出了 1，2，3，undefined，这说明是可以传入多个值，并且就算方法中引用多了也不会报错。</p>
+<h4 id="扩展运算符的用处："><a href="#扩展运算符的用处：" class="headerlink" title="扩展运算符的用处："></a>扩展运算符的用处：</h4><p>我们先用一个例子说明，我们声明两个数组arr1和arr2，然后我们把arr1赋值给arr2，然后我们改变arr2的值，会发现arr1的值也变了，因为我们这是对内存堆栈的引用，而不是真正的赋值。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let arr1=['w','dd','aaa'];</span><br><span class="line">let arr2=arr1;</span><br><span class="line">console.log(arr2);</span><br><span class="line">arr2.push('todo');</span><br><span class="line">console.log(arr1);</span><br></pre></td></tr></tbody></table></figure>
+<p>控制台输出：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">["w", "dd", "aaa"]</span><br><span class="line">["w", "dd", "aaa", "todo"]</span><br></pre></td></tr></tbody></table></figure>
+<p>可以利用对象扩展运算符解决这个问题，改一下代码：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let arr1=['w','dd','aaa'];</span><br><span class="line">//let arr2=arr1;</span><br><span class="line">let arr2=[...arr1];  //表示arr1里的每一个元素</span><br><span class="line">console.log(arr2);</span><br><span class="line">arr2.push('todo');</span><br><span class="line">console.log(arr2);</span><br><span class="line">console.log(arr1);</span><br></pre></td></tr></tbody></table></figure>
+<p>现在的结果就变成：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">["w", "dd", "aaa"]</span><br><span class="line">["w", "dd", "aaa", "todo"]</span><br><span class="line">["w", "dd", "aaa"]  //arr1的值并没有改变</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="rest运算符"><a href="#rest运算符" class="headerlink" title="rest运算符"></a>rest运算符</h3><p>eg：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function da0sy(first,...arg){</span><br><span class="line">    console.log(arg.length);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">da0sy(0,1,2,3,4,5,6,7);</span><br></pre></td></tr></tbody></table></figure>
+<p>控制台打印出7，说明arg里有7个数组元素，这就是rest运算符的最简单用法。</p>
+<h4 id="如何循环输出rest运算符"><a href="#如何循环输出rest运算符" class="headerlink" title="如何循环输出rest运算符"></a>如何循环输出rest运算符</h4><p>这里我们用<strong>for…of循环</strong>来进行打印出arg的值，只是一个简单的使用。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function da0sy(first,...arg){</span><br><span class="line">    for(let val of arg){</span><br><span class="line">        console.log(val);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">da0sy(0,1,2,3,4,5,6,7);</span><br></pre></td></tr></tbody></table></figure>
+<p>for…of的循环可以避免我们开拓内存空间，增加代码运行效率，虽然最后要转换成ES5，没有什么差别，但是至少从代码量上我们少打了一些单词，这就是开发效率的提高。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/posts/a0b5abf4/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-ES6-第六节-ES6数字操作"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/266d507b/">ES6 第六节 ES6数字操作</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-03-20 18:36:01" datetime="2020-03-20T10:36:01.000Z"  itemprop="datePublished">2020-03-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="ES6-第六节-ES6数字操作"><a href="#ES6-第六节-ES6数字操作" class="headerlink" title="ES6 第六节 ES6数字操作"></a>ES6 第六节 ES6数字操作</h1><p>@(ES6)[ES6]</p>
+<hr>
+<p>[toc]</p>
+<h2 id="第六节-ES6数字操作"><a href="#第六节-ES6数字操作" class="headerlink" title="第六节 ES6数字操作"></a>第六节 ES6数字操作</h2><h3 id="二进制和八进制"><a href="#二进制和八进制" class="headerlink" title="二进制和八进制"></a>二进制和八进制</h3><p>二进制和八进制数字的声明并不是ES6的特性，做一个常识性的回顾。</p>
+<h4 id="二进制声明："><a href="#二进制声明：" class="headerlink" title="二进制声明："></a>二进制声明：</h4><p>二进制的英文单词是Binary，二进制的开始是0（零），第二个位置是b（大小写都可以实现），然后跟上二进制的值就可以了。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//二进制声明 Binary</span><br><span class="line">let binary = 0B010101;</span><br><span class="line">console.log(binary);</span><br></pre></td></tr></tbody></table></figure>
+<p>控制台输出：21</p>
+<h4 id="八进制声明："><a href="#八进制声明：" class="headerlink" title="八进制声明："></a>八进制声明：</h4><p>八进制的英文单词是Octal，也是以0（零）开始的，第二个位置是O（欧），然后跟上八进制的值就可以了。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let Octal=0o666;</span><br><span class="line">console.log(Octal);</span><br></pre></td></tr></tbody></table></figure>
+<p>控制台输出：438</p>
+<h3 id="数字判断和转换"><a href="#数字判断和转换" class="headerlink" title="数字判断和转换"></a>数字判断和转换</h3><h4 id="数字验证Number-isFinite-xx"><a href="#数字验证Number-isFinite-xx" class="headerlink" title="数字验证Number.isFinite(xx)"></a>数字验证Number.isFinite(xx)</h4><p>可以使用<strong>Number.isFinite( )</strong>来进行数字验证，只要是数字，不论是浮点型还是整型都会返回true，其他时候会返回false。 </p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let a= 11/4;</span><br><span class="line">console.log(Number.isFinite(a));//true</span><br><span class="line">console.log(Number.isFinite('da0sy'));//false</span><br><span class="line">console.log(Number.isFinite(NaN));//false</span><br><span class="line">console.log(Number.isFinite(undefined));//false</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="NaN验证"><a href="#NaN验证" class="headerlink" title="NaN验证"></a>NaN验证</h4><p>NaN是特殊的非数字，可以使用<strong>Number.isNaN()</strong>来进行验证。下边的代码控制台返回了true。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(Number.isNaN(NaN));</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="判断是否为整数Number-isInteger-xx"><a href="#判断是否为整数Number-isInteger-xx" class="headerlink" title="判断是否为整数Number.isInteger(xx)"></a>判断是否为整数Number.isInteger(xx)</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let a=123.1;</span><br><span class="line">console.log(Number.isInteger(a)); //false</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="整数转换Number-parseInt-xxx-和浮点型转换Number-parseFloat-xxx"><a href="#整数转换Number-parseInt-xxx-和浮点型转换Number-parseFloat-xxx" class="headerlink" title="整数转换Number.parseInt(xxx)和浮点型转换Number.parseFloat(xxx)"></a>整数转换Number.parseInt(xxx)和浮点型转换Number.parseFloat(xxx)</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a='9.18';</span><br><span class="line">console.log(Number.parseInt(a));   //9</span><br><span class="line">console.log(Number.parseFloat(a));  //9.18</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="整数取值范围操作"><a href="#整数取值范围操作" class="headerlink" title="整数取值范围操作"></a>整数取值范围操作</h4><p>整数的操作是有一个取值范围的，它的取值范围就是2的53次方。我们先用程序来看一下这个数字是什么。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let a = Math.pow(2,53)-1;</span><br><span class="line">console.log(a); //9007199254740991</span><br></pre></td></tr></tbody></table></figure>
+<p>在我们计算时会经常超出这个值，所以我们要进行判断，ES6提供了一个常数，叫做最大安全整数，以后就不需要我们计算了。</p>
+<h4 id="最大安全整数"><a href="#最大安全整数" class="headerlink" title="最大安全整数"></a>最大安全整数</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(Number.MAX_SAFE_INTEGER);//就是9007...上面那个数值</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="最小安全整数"><a href="#最小安全整数" class="headerlink" title="最小安全整数"></a>最小安全整数</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(Number.MIN_SAFE_INTEGER);  //是-9007...</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="安全整数判断isSafeInteger"><a href="#安全整数判断isSafeInteger" class="headerlink" title="安全整数判断isSafeInteger()"></a>安全整数判断isSafeInteger()</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let a= Math.pow(2,53)-1;  //2的53次方</span><br><span class="line">console.log(Number.isSafeInteger(a));//true，安全</span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/posts/266d507b/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-ES6-第五节-字符串模板"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/5d5807df/">ES6 第五节 字符串模板</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-03-20 18:32:04" datetime="2020-03-20T10:32:04.000Z"  itemprop="datePublished">2020-03-20</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="ES6-第五节-字符串模板"><a href="#ES6-第五节-字符串模板" class="headerlink" title="ES6 第五节 字符串模板"></a>ES6 第五节 字符串模板</h1><p>@(ES6)[ES6]</p>
+<hr>
+<p>[TOC]</p>
+<h2 id="第五节-字符串模板"><a href="#第五节-字符串模板" class="headerlink" title="第五节 字符串模板"></a>第五节 字符串模板</h2><p>ES6对<strong>字符串新增</strong>的操作，最重要的就是<font color="red"><strong>字符串模版</strong></font>，字符串模版的出现让我们再也<strong>不用拼接变量</strong>了，而且支持在模板里有<strong>简单计算</strong>操作。</p>
+<h3 id="字符串模板"><a href="#字符串模板" class="headerlink" title="字符串模板"></a>字符串模板</h3><p>先来看一个在ES5下我们的字符串拼接案例：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let da0sy='黛西';</span><br><span class="line">let blog = '很高兴遇见你，我是你的老朋友'+da0sy+'。这节课我们学习字符串模版。';</span><br><span class="line">document.write(blog);</span><br></pre></td></tr></tbody></table></figure>
+<p>ES5下必须用+da0sy+这样的形式进行拼接，这样很麻烦而且很容易出错。<br>ES6新增了字符串模版，可以很好的解决这个问题。字符串模版不再使用‘xxx’这样的单引号，而是换成了xxx这种形式，也叫连接号。这时我们再引用da0sy变量就需要用${da0sy}这种形式了，我们对上边的代码进行改造:</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let da0sy='黛西';</span><br><span class="line">let blog = `很高兴遇见你，我是你的老朋友${da0sy}。这节课我们学习字符串模版。`;</span><br><span class="line">document.write(blog);</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看到浏览器出现了和上边代码一样的结果。<br>而且这里面支持html标签，可以试着输入一些：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let da0sy='黛西';</span><br><span class="line">let blog = `很高兴遇见你，我是你的老朋友${da0sy}。&lt;br/&gt;这节课我们学习字符串模版。`;</span><br><span class="line">document.write(blog);</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="对运算的支持"><a href="#对运算的支持" class="headerlink" title="对运算的支持"></a>对运算的支持</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let a=1;</span><br><span class="line">let b=2;</span><br><span class="line">let result=`${a+b}`;</span><br><span class="line">document.write(result);</span><br></pre></td></tr></tbody></table></figure>
+<p>页面输出为3.<br>强大的字符串模版，在实际开发中，我们可以让后台写一个活动页面，然后轻松的输出给用户。</p>
+<h3 id="字符串查找"><a href="#字符串查找" class="headerlink" title="字符串查找"></a>字符串查找</h3><p>ES6还增加了字符串的查找功能，而且支持中文。</p>
+<h4 id="查找是否存在："><a href="#查找是否存在：" class="headerlink" title="查找是否存在："></a>查找是否存在：</h4><p>先来看一下ES5的写法，其实这种方法并不实用，给我们的索引位置，我们自己还要确定位置。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let da0sy = '黛西';</span><br><span class="line">let blog = '很高兴遇见你，我是你的老朋友黛西。这节课我们学习字符串模版。';</span><br><span class="line">document.write(blog.indexOf(da0sy));</span><br></pre></td></tr></tbody></table></figure>
+<p>网页中输出了14，我们还要自己判断。</p>
+<p>ES6直接用<strong>includes</strong>就可以判断，不再返回索引值。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let da0sy = '黛西';</span><br><span class="line">let blog = '很高兴遇见你，我是你的老朋友黛西。这节课我们学习字符串模版。';</span><br><span class="line">document.write(blog.includes(da0sy));</span><br></pre></td></tr></tbody></table></figure>
+<p>网页输出true，说明这句话里有黛西。</p>
+<h4 id="判断开头是否存在："><a href="#判断开头是否存在：" class="headerlink" title="判断开头是否存在："></a>判断开头是否存在：</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog.startsWith(da0sy);</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="判断结尾是否存在："><a href="#判断结尾是否存在：" class="headerlink" title="判断结尾是否存在："></a>判断结尾是否存在：</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog.endsWith(da0sy);</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="复制字符串"><a href="#复制字符串" class="headerlink" title="复制字符串"></a>复制字符串</h3><p>我们有时候是需要字符串重复的，比如分隔符和特殊符号，这时候复制字符串就派上用场了，语法很简单。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.write('da0sy|'.repeat(3));</span><br></pre></td></tr></tbody></table></figure>
+<p>网页输出：da0sy|da0sy|da0sy|</p>
+<p>ES6对字符串还有一些其它操作，自行查询。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/posts/5d5807df/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-hello-world"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -255,9 +897,200 @@
 
         </li>
     
+        <li class="post-list-item fade">
+            <article id="post-ES6-第三节-变量的解构赋值"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/3079772d/">ES6 第三节 变量的解构赋值</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-03-19 16:13:10" datetime="2020-03-19T08:13:10.000Z"  itemprop="datePublished">2020-03-19</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="ES6-第三节-变量的解构赋值"><a href="#ES6-第三节-变量的解构赋值" class="headerlink" title="ES6 第三节 变量的解构赋值"></a>ES6 第三节 变量的解构赋值</h1><hr>
+<h2 id="第三节-变量的解构赋值"><a href="#第三节-变量的解构赋值" class="headerlink" title="第三节 变量的解构赋值"></a>第三节 变量的解构赋值</h2><p>ES6允许按照一定模式，从<strong>数组</strong>和<strong>对象</strong>中提取值，对变量进行赋值，这被称为解构。解构赋值在实际开发中可以大量减少我们的代码量，并且让我们的程序结构更清晰。也许你还是不太明白，那先来一个最简单的数组解构赋值来进行赋值。</p>
+<h3 id="数据的解构赋值"><a href="#数据的解构赋值" class="headerlink" title="数据的解构赋值"></a>数据的解构赋值</h3><p>以前，为变量赋值，我们只能直接指定值。比如下面的代码：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a=0;</span><br><span class="line">let b=1;</span><br><span class="line">let c=2;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>而现在我们可以用数组解构的方式来进行赋值。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let  [a,b,c]=[1,2,3];</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上面的代码表示，可以从数组中提取值，按照位置的对象关系对变量赋值。</p>
+<h3 id="数组模式和赋值模式统一："><a href="#数组模式和赋值模式统一：" class="headerlink" title="数组模式和赋值模式统一："></a>数组模式和赋值模式统一：</h3><p>可以简单的理解为等号左边和等号右边的形式要统一，如果不统一解构将失败。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let [a,[b,c],d]=[1,[2,3],4];</span><br></pre></td></tr></tbody></table></figure>
+
+<p>如果等号两边形式不一样，很可能获得undefined或者直接报错。</p>
+<h3 id="解构的默认值："><a href="#解构的默认值：" class="headerlink" title="解构的默认值："></a>解构的默认值：</h3><p>解构赋值是允许你使用默认值的，先看一个最简单的默认true的例子。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let [foo = true] =[];</span><br><span class="line">console.log(foo);  //控制台打印出true</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上边的例子数组中只有一个值，可能你会多少有些疑惑，我们就来个多个值的数组，并给他一些默认值。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let [a,b="Da0sy"]=['黛西']</span><br><span class="line">console.log(a+b);  //控制台显示“黛西Da0sy”</span><br></pre></td></tr></tbody></table></figure>
+<p>现在我们对<strong>默认值</strong>有所了解，需要注意的是<strong>undefined和null的区别</strong>。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let [a,b="Da0sy"]=['黛西',undefined];</span><br><span class="line">console.log(a+b); //控制台显示“黛西Da0sy”</span><br></pre></td></tr></tbody></table></figure>
+<p>undefined相当于什么都没有，b是默认值。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let [a,b="Da0sy"]=['黛西',null];</span><br><span class="line">console.log(a+b); //控制台显示“黛西null”</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>null相当于有值，但值为null。</strong>所以b并没有取默认值，而是解构成了null。</p>
+<h3 id="对象的解构赋值"><a href="#对象的解构赋值" class="headerlink" title="对象的解构赋值"></a>对象的解构赋值</h3><p>解构不仅可以用于数组，还可以用于对象。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let {foo,bar} = {foo:'Da0sy',bar:'黛西'};</span><br><span class="line">console.log(foo+bar); //控制台打印出了“Da0sy黛西”</span><br></pre></td></tr></tbody></table></figure>
+<p>注意：对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。</p>
+<h3 id="圆括号的使用"><a href="#圆括号的使用" class="headerlink" title="圆括号的使用"></a>圆括号的使用</h3><p>如果在解构之前就定义了变量，这时候你再解构会出现问题。下面是错误的代码，编译会报错。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let foo;</span><br><span class="line">{foo} ={foo:'Da0sy'};</span><br><span class="line">console.log(foo);</span><br></pre></td></tr></tbody></table></figure>
+<p>要解决报错，使程序正常，我们这时候只要在解构的语句外边加一个圆括号就可以了。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let foo;</span><br><span class="line">({foo} ={foo:'Da0sy'});</span><br><span class="line">console.log(foo); //控制台输出Da0sy</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="字符串解构"><a href="#字符串解构" class="headerlink" title="字符串解构"></a>字符串解构</h3><p>字符串也可以解构，这是因为，此时字符串被转换成了一个类似数组的<strong>对象</strong>。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const [a,b,c,d,e]="Da0sy";</span><br><span class="line">console.log(a);</span><br><span class="line">console.log(b);</span><br><span class="line">console.log(c);</span><br><span class="line">console.log(d);</span><br><span class="line">console.log(e);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./ds.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>实战项目中解构Json数据格式还是很普遍的，有了ES6得帮助，提高了不少工作效率。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/posts/3079772d/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-ES6-第二节-新的声明方式"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/38faf734/">ES6 第二节 新的声明方式</a>
+    </h3>
+  
+
+
+
+
+     <div class="post-meta">
+        <time class="post-time" title="2020-03-19 16:12:07" datetime="2020-03-19T08:12:07.000Z"  itemprop="datePublished">2020-03-19</time>
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="ES6-第二节-新的声明方式"><a href="#ES6-第二节-新的声明方式" class="headerlink" title="ES6 第二节 新的声明方式"></a>ES6 第二节 新的声明方式</h1><hr>
+<h2 id="第二节-新的声明方式"><a href="#第二节-新的声明方式" class="headerlink" title="第二节 新的声明方式"></a>第二节 新的声明方式</h2><p>以前我们在声明时只有一种方法，就是使用var来进行声明，ES6对声明的进行了扩展，现在可以有三种声明方式了。</p>
+<p><strong>字面理解ES6的三种声明方式：</strong></p>
+<ul>
+<li><code>var</code>：它是variable的简写，可以理解成变量的意思。</li>
+<li><code>let</code>：它在英文中是“让”的意思，也可以理解为一种声明的意思。</li>
+<li><code>const</code>：它在英文中也是常量的意思，在ES6也是用来声明常量的，常量你可以简单理解为不变的量。</li>
+</ul>
+<h3 id="var声明："><a href="#var声明：" class="headerlink" title="var声明："></a>var声明：</h3><p>var在ES6里是用来升级<strong>全局变量</strong>的，我们可以先作一个最简单的实例，用var声明一个变量a,然后用console.log进行输出。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a='Da0sy';</span><br><span class="line">console.log(a);</span><br></pre></td></tr></tbody></table></figure>
+<p>我们可以看到Da0sy在控制台已经被打印出来了。那如何理解它的作用是声明全局变量呢？我们用匿名函数给他进行一个包裹，然后在匿名函数中调用这个a变量，看看能不能调用到。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a="Da0sy";</span><br><span class="line">window.onload= function(){</span><br><span class="line">    console.log(a);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>可以看到控制台输出了Da0sy，这证明var确实是全局的。如果你觉得这个不够直观说明var是全局声明，还可以用区块的方式进行调用测试，先看下面的代码。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a=2;</span><br><span class="line">{</span><br><span class="line">   var a=3;</span><br><span class="line">}</span><br><span class="line">console.log(a);</span><br></pre></td></tr></tbody></table></figure>
+<p>这时打印出来的值是3，因为var是全局声明的。</p>
+<h3 id="let局部声明"><a href="#let局部声明" class="headerlink" title="let局部声明"></a>let局部声明</h3><p>通过两个简单的例子，我们对var的全局声明有了一定了解。那跟var相对应的是let，它是局部变量声明。还是上面的例子，我们试着在区块里用let声明。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a=2;</span><br><span class="line">{</span><br><span class="line">   let a=3;</span><br><span class="line">}</span><br><span class="line">console.log(a);</span><br></pre></td></tr></tbody></table></figure>
+<p>这时候控制台打印出来的值就是2了。如果我们只在区块里声明，不再外部声明，我们打印a时就会报错，显示找不到变量。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">   let a=3;</span><br><span class="line">}</span><br><span class="line">console.log(a);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上面两个例子说明了let是<strong>局部变量</strong>声明，let声明只在区块内起作用，外部是不可以调用的。</p>
+<p>有些刚接触JavaScript的小伙伴会疑惑了，我感觉let还没有var好用，其实let是防止你的数据污染的，在大型项目中是非常有用处的。现在看一个循环的例子，我们来看一下let的好处。</p>
+<h4 id="用var声明的循环"><a href="#用var声明的循环" class="headerlink" title="用var声明的循环"></a>用var声明的循环</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(let i=0;i&lt;10;i++){</span><br><span class="line">	console.log('循环体中:'+i);</span><br><span class="line">}</span><br><span class="line">console.log('循环体外:'+i);</span><br></pre></td></tr></tbody></table></figure>
+<p>执行时会发现控制台报错，找不到循环体外的i变量。</p>
+<p>通过两种声明的比较，可以明白let在防止程序数据污染上还是很有用处的。我们要努力去习惯用let声明，减少var声明去污染全局空间，在vue的使用中也要注意这点。</p>
+<h3 id="const声明常量"><a href="#const声明常量" class="headerlink" title="const声明常量"></a>const声明常量</h3><p>在程序开发中，有些变量是希望声明后在业务层就不再发生变化了，简单来说就是从声明开始，这个变量<strong>始终不变</strong>，就需要用const进行声明。</p>
+<p>我们来一段用const声明错误的代码，在错误中学习const的特性也是非常好的。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const a="Da0sy";</span><br><span class="line">var a='黛西';</span><br><span class="line">console.log(a);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在编译这段代码的过程中，就已经报错，无法编译，原因就是我们const声明的变量是不可以改变的。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    
+        <div class="post-more-div">
+            <a href="/posts/38faf734/" class="post-more waves-button">
+                Continue reading...
+            </a>
+        </div>
+    </div>
+    
+</article>
+
+        </li>
+    
     </ul>
 
     
+<nav id="page-nav">
+    <div class="inner">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    </div>
+</nav>
+
 
 </div>
 

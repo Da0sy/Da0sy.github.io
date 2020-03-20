@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>ES6 第六节 ES6数字操作 | Rinah Teng&#39;s paradise</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#E6ACCA">
+    
+    
+    <meta name="keywords" content="">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="ES6 第六节 ES6数字操作@(ES6)[ES6]  [toc] 第六节 ES6数字操作二进制和八进制二进制和八进制数字的声明并不是ES6的特性，做一个常识性的回顾。 二进制声明：二进制的英文单词是Binary，二进制的开始是0（零），第二个位置是b（大小写都可以实现），然后跟上二进制的值就可以了。 123&#x2F;&#x2F;二进制声明 Binarylet binary &#x3D; 0B010101;console.l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 第六节 ES6数字操作">
+<meta property="og:url" content="http://tomotoes.com/posts/266d507b/index.html">
+<meta property="og:site_name" content="Rinah Teng&#39;s paradise">
+<meta property="og:description" content="ES6 第六节 ES6数字操作@(ES6)[ES6]  [toc] 第六节 ES6数字操作二进制和八进制二进制和八进制数字的声明并不是ES6的特性，做一个常识性的回顾。 二进制声明：二进制的英文单词是Binary，二进制的开始是0（零），第二个位置是b（大小写都可以实现），然后跟上二进制的值就可以了。 123&#x2F;&#x2F;二进制声明 Binarylet binary &#x3D; 0B010101;console.l">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-20T10:36:01.000Z">
+<meta property="article:modified_time" content="2020-03-20T10:37:05.107Z">
+<meta property="article:author" content="Cardiac Dejavu">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="Rinah Teng&#39;s paradise" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">Cardiac Dejavu</h5>
+          
+            <div id="mymotto" class="motto"></div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/about"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="mailto:993397125@qq.com" target="_parent"title="Email" >
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/Da0sy" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Weibo" href="https://weibo.com/6277484069/profile?topnav=1&wvr=6" target="_blank"title="Weibo" >
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ES6 第六节 ES6数字操作</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ES6-第六节-ES6数字操作"><span class="post-toc-number">1.</span> <span class="post-toc-text">ES6 第六节 ES6数字操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第六节-ES6数字操作"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">第六节 ES6数字操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二进制和八进制"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">二进制和八进制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#二进制声明："><span class="post-toc-number">1.1.1.1.</span> <span class="post-toc-text">二进制声明：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#八进制声明："><span class="post-toc-number">1.1.1.2.</span> <span class="post-toc-text">八进制声明：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数字判断和转换"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">数字判断和转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数字验证Number-isFinite-xx"><span class="post-toc-number">1.1.2.1.</span> <span class="post-toc-text">数字验证Number.isFinite(xx)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NaN验证"><span class="post-toc-number">1.1.2.2.</span> <span class="post-toc-text">NaN验证</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#判断是否为整数Number-isInteger-xx"><span class="post-toc-number">1.1.2.3.</span> <span class="post-toc-text">判断是否为整数Number.isInteger(xx)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#整数转换Number-parseInt-xxx-和浮点型转换Number-parseFloat-xxx"><span class="post-toc-number">1.1.2.4.</span> <span class="post-toc-text">整数转换Number.parseInt(xxx)和浮点型转换Number.parseFloat(xxx)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#整数取值范围操作"><span class="post-toc-number">1.1.2.5.</span> <span class="post-toc-text">整数取值范围操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#最大安全整数"><span class="post-toc-number">1.1.2.6.</span> <span class="post-toc-text">最大安全整数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#最小安全整数"><span class="post-toc-number">1.1.2.7.</span> <span class="post-toc-text">最小安全整数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安全整数判断isSafeInteger"><span class="post-toc-number">1.1.2.8.</span> <span class="post-toc-text">安全整数判断isSafeInteger()</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-ES6-第六节-ES6数字操作"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ES6 第六节 ES6数字操作</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2020-03-20 18:36:01" datetime="2020-03-20T10:36:01.000Z"  itemprop="datePublished">2020-03-20</time>
+
+            <br id="mybreak"/>
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">2</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="ES6-第六节-ES6数字操作"><a href="#ES6-第六节-ES6数字操作" class="headerlink" title="ES6 第六节 ES6数字操作"></a>ES6 第六节 ES6数字操作</h1><p>@(ES6)[ES6]</p>
+<hr>
+<p>[toc]</p>
+<h2 id="第六节-ES6数字操作"><a href="#第六节-ES6数字操作" class="headerlink" title="第六节 ES6数字操作"></a>第六节 ES6数字操作</h2><h3 id="二进制和八进制"><a href="#二进制和八进制" class="headerlink" title="二进制和八进制"></a>二进制和八进制</h3><p>二进制和八进制数字的声明并不是ES6的特性，做一个常识性的回顾。</p>
+<h4 id="二进制声明："><a href="#二进制声明：" class="headerlink" title="二进制声明："></a>二进制声明：</h4><p>二进制的英文单词是Binary，二进制的开始是0（零），第二个位置是b（大小写都可以实现），然后跟上二进制的值就可以了。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//二进制声明 Binary</span><br><span class="line">let binary = 0B010101;</span><br><span class="line">console.log(binary);</span><br></pre></td></tr></tbody></table></figure>
+<p>控制台输出：21</p>
+<h4 id="八进制声明："><a href="#八进制声明：" class="headerlink" title="八进制声明："></a>八进制声明：</h4><p>八进制的英文单词是Octal，也是以0（零）开始的，第二个位置是O（欧），然后跟上八进制的值就可以了。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let Octal=0o666;</span><br><span class="line">console.log(Octal);</span><br></pre></td></tr></tbody></table></figure>
+<p>控制台输出：438</p>
+<h3 id="数字判断和转换"><a href="#数字判断和转换" class="headerlink" title="数字判断和转换"></a>数字判断和转换</h3><h4 id="数字验证Number-isFinite-xx"><a href="#数字验证Number-isFinite-xx" class="headerlink" title="数字验证Number.isFinite(xx)"></a>数字验证Number.isFinite(xx)</h4><p>可以使用<strong>Number.isFinite( )</strong>来进行数字验证，只要是数字，不论是浮点型还是整型都会返回true，其他时候会返回false。 </p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let a= 11/4;</span><br><span class="line">console.log(Number.isFinite(a));//true</span><br><span class="line">console.log(Number.isFinite('da0sy'));//false</span><br><span class="line">console.log(Number.isFinite(NaN));//false</span><br><span class="line">console.log(Number.isFinite(undefined));//false</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="NaN验证"><a href="#NaN验证" class="headerlink" title="NaN验证"></a>NaN验证</h4><p>NaN是特殊的非数字，可以使用<strong>Number.isNaN()</strong>来进行验证。下边的代码控制台返回了true。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(Number.isNaN(NaN));</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="判断是否为整数Number-isInteger-xx"><a href="#判断是否为整数Number-isInteger-xx" class="headerlink" title="判断是否为整数Number.isInteger(xx)"></a>判断是否为整数Number.isInteger(xx)</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let a=123.1;</span><br><span class="line">console.log(Number.isInteger(a)); //false</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="整数转换Number-parseInt-xxx-和浮点型转换Number-parseFloat-xxx"><a href="#整数转换Number-parseInt-xxx-和浮点型转换Number-parseFloat-xxx" class="headerlink" title="整数转换Number.parseInt(xxx)和浮点型转换Number.parseFloat(xxx)"></a>整数转换Number.parseInt(xxx)和浮点型转换Number.parseFloat(xxx)</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a='9.18';</span><br><span class="line">console.log(Number.parseInt(a));   //9</span><br><span class="line">console.log(Number.parseFloat(a));  //9.18</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="整数取值范围操作"><a href="#整数取值范围操作" class="headerlink" title="整数取值范围操作"></a>整数取值范围操作</h4><p>整数的操作是有一个取值范围的，它的取值范围就是2的53次方。我们先用程序来看一下这个数字是什么。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let a = Math.pow(2,53)-1;</span><br><span class="line">console.log(a); //9007199254740991</span><br></pre></td></tr></tbody></table></figure>
+<p>在我们计算时会经常超出这个值，所以我们要进行判断，ES6提供了一个常数，叫做最大安全整数，以后就不需要我们计算了。</p>
+<h4 id="最大安全整数"><a href="#最大安全整数" class="headerlink" title="最大安全整数"></a>最大安全整数</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(Number.MAX_SAFE_INTEGER);//就是9007...上面那个数值</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="最小安全整数"><a href="#最小安全整数" class="headerlink" title="最小安全整数"></a>最小安全整数</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(Number.MIN_SAFE_INTEGER);  //是-9007...</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="安全整数判断isSafeInteger"><a href="#安全整数判断isSafeInteger" class="headerlink" title="安全整数判断isSafeInteger()"></a>安全整数判断isSafeInteger()</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let a= Math.pow(2,53)-1;  //2的53次方</span><br><span class="line">console.log(Number.isSafeInteger(a));//true，安全</span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-03-20T10:37:05.107Z" itemprop="dateUpdated">2020-03-20 18:37:05</time>
+</span>
+
+
+        
+    </div>
+    <footer>
+        <div onclick="location.href='http://tomotoes.com'">
+            <img src="/img/avatar.jpg" alt="Cardiac Dejavu">
+            <a>Cardiac Dejavu</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tomotoes.com/posts/266d507b/&title=《ES6 第六节 ES6数字操作》 — Rinah Teng's paradise&pic=http://tomotoes.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tomotoes.com/posts/266d507b/&title=《ES6 第六节 ES6数字操作》 — Rinah Teng's paradise&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tomotoes.com/posts/266d507b/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ES6 第六节 ES6数字操作》 — Rinah Teng's paradise&url=http://tomotoes.com/posts/266d507b/&via=http://tomotoes.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tomotoes.com/posts/266d507b/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/a0b5abf4/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：ES6 第四节 扩展运算符和rest运算符
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/5d5807df/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：ES6 第五节 字符串模板">下一篇：ES6 第五节 字符串模板</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2020
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="http://tomotoes.com">Da0sy.com</a>
+            <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a>
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;"></span>
+        <br/>
+
+        <span>
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license">This blog is licensed under a <a rel="license noopener" rel="external nofollow noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/img/Daisy.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tomotoes.com/posts/266d507b/&title=《ES6 第六节 ES6数字操作》 — Rinah Teng's paradise&pic=http://tomotoes.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tomotoes.com/posts/266d507b/&title=《ES6 第六节 ES6数字操作》 — Rinah Teng's paradise&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tomotoes.com/posts/266d507b/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ES6 第六节 ES6数字操作》 — Rinah Teng's paradise&url=http://tomotoes.com/posts/266d507b/&via=http://tomotoes.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tomotoes.com/posts/266d507b/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABzElEQVR42u3aSY6DQAwF0Nz/0vQ2UkL4tqkSLb1aRWF6sLA81OsVr+Ntvf/z++jnOjv/5oWLizvmHj/Xb1wO/cT1rsLFxd3JPYsYZ7frhbMkLF7YcHFxH8ytBrL8tXFxcf8Xtxq8qv/g4uI+jdtrZFwUKsUmy821Gi4u7oCbP2Dd7yX9XVxc3Bb3GKx17dHTu+Hi4m7h9oqc3ui09wm+hDxcXNzF3Bx3lpTkLdGk/XHx8ri4uBu5SRGSt0jmrFMPLi7udm5vg0XeEu2NZL6kOLi4uFu41eCVJzp3tWVfyU1xcXFv4vbaFnnikmzVygMfLi7uHm6vRMkbJXkojM7BxcXdwp2EsGqoquIuJj+4uLjLuPcGmh66cC0uLu527qT1OY+mUQqFi4u7hVsNYfNBabXV8urdAhcXd8BNAs18s0VhjJoXP7i4uMu4+aaK+XaK6qj19GPh4uIu5h7FNUl68nRnNETBxcUdc3vB5a4GR34UFxd3PzcJXgkiH8OMNmrg4uJu5CZNjfzB1QFMXm7h4uI+jTspafJU5uIpuLi4D+Mm/ddk21avCYuLi7uf20Pk6ctkDHM6+cHFxV3GzUuR6gCmmsrkiRQuLu4y7h/damLppzi8ZgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+</script>
+
+<!-- jquery -->
+<script src="/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2020/03/19");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+    elasticText({
+        id: "mymotto",
+        duration: 100,
+        effact: "easeOut",
+        content: ""
+    });
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "Cardiac Dejavu");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 一个坏掉的番茄 %c  © Simon Ma  http://tomotoes.com \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>
