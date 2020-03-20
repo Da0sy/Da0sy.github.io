@@ -6,7 +6,7 @@
     
     
     
-    <title>归档: 2020 | Rinah Teng&#39;s paradise</title>
+    <title>标签: vue 2.0 | Rinah Teng&#39;s paradise</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     
     <meta name="theme-color" content="#E6ACCA">
@@ -41,7 +41,7 @@
     
     <meta property="og:type" content="website">
 <meta property="og:title" content="Rinah Teng&#39;s paradise">
-<meta property="og:url" content="http://tomotoes.com/archives/2020/page/3/index.html">
+<meta property="og:url" content="http://tomotoes.com/tags/vue-2-0/page/2/index.html">
 <meta property="og:site_name" content="Rinah Teng&#39;s paradise">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Cardiac Dejavu">
@@ -88,7 +88,7 @@
                   </a>
               </li>
             
-              <li class="waves-block waves-effect active">
+              <li class="waves-block waves-effect">
                   <a href="/archives"  >
                     <i class="icon icon-lg icon-archives"></i>
                     <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
@@ -102,7 +102,7 @@
                   </a>
               </li>
             
-              <li class="waves-block waves-effect">
+              <li class="waves-block waves-effect active">
                   <a href="/tags"  >
                     <i class="icon icon-lg icon-tags"></i>
                     <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
@@ -147,7 +147,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">归档</div>
+        <div class="flex-col header-title ellipsis">标签: vue 2.0</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -164,7 +164,7 @@
         </a>
     </div>
 </header>
-<header class="content-header archives-header">
+<header class="content-header tags-header">
     
     
     <div class="container fade-scale">
@@ -174,7 +174,19 @@
             </h1>
             <h5 class="subtitle">
                 
-                    <h1 class="archivestitle">Keep on fighting~</h1>
+                    <h1 id="pagetitle" class="archivestitle"></h1>
+                    <script>
+                        if(location.href.indexOf('about')!=-1){
+                            pagetitle.textContent = '半岛微醺~~~';
+                        }else if(location.href.indexOf('tags')!=-1||location.href.indexOf('categories')!=-1){
+                            var a=location.href.substring(location.href.length-5,location.href.length-1);
+                            if(a==='tags'){
+                                pagetitle.textContent = 'Keep moving on~';
+                            }else if(a==='ries'){
+                                pagetitle.textContent = 'Letting Go and Moving On~';
+                            }
+                        }
+                    </script>
                 
             </h5>
         </div>
@@ -182,25 +194,82 @@
 
 </header>
 
-<div class="container body-wrap fade">
-    
 
-    
+    <div class="container body-wrap fade">
+        
             
-            <h3 class="archive-separator">
-                <i class="icon icon-lg icon-folder-o"></i>&nbsp;&nbsp;
-                2020
-            </h3>
+            
+            <h5 class="tag-tip">
+                <i class="icon icon-tag"></i>
+                关于
+                <span style="color:rgb(100, 100, 100)">vue 2.0</span>
+                共25篇文章
+            </h5>
             <div class="waterfall">
-    
-
-        <article class="archive-article" onclick="location.href='/posts/f35f578e/'">
+            
+                <article class="archive-article" onclick="location.href='/posts/af610746/'">
     <div class="archive-article-date">
       
       <time class="my-post-time">
         <i class="icon icon-lg icon-file-text-o"></i>
         &nbsp;
-          03-15
+          2020-03-15
+      </time>
+    </div>
+    <div class="archive-article-inner">
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/af610746/">Vue2.0 【第二季】第8节 Component 父子组件关系</a>
+    </h3>
+  
+
+
+
+      <br/>
+      
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-2-0/" rel="tag">vue 2.0</a></li></ul>
+
+    </div>
+  </article>
+            
+                <article class="archive-article" onclick="location.href='/posts/9e36f38d/'">
+    <div class="archive-article-date">
+      
+      <time class="my-post-time">
+        <i class="icon icon-lg icon-file-text-o"></i>
+        &nbsp;
+          2020-03-15
+      </time>
+    </div>
+    <div class="archive-article-inner">
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a href="/posts/9e36f38d/">Vue2.0 【第二季】第7节 Component 组件 props 属性设置</a>
+    </h3>
+  
+
+
+
+      <br/>
+      
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-2-0/" rel="tag">vue 2.0</a></li></ul>
+
+    </div>
+  </article>
+            
+                <article class="archive-article" onclick="location.href='/posts/f35f578e/'">
+    <div class="archive-article-date">
+      
+      <time class="my-post-time">
+        <i class="icon icon-lg icon-file-text-o"></i>
+        &nbsp;
+          2020-03-15
       </time>
     </div>
     <div class="archive-article-inner">
@@ -221,16 +290,14 @@
 
     </div>
   </article>
-
-    
-
-        <article class="archive-article" onclick="location.href='/posts/56d26f90/'">
+            
+                <article class="archive-article" onclick="location.href='/posts/56d26f90/'">
     <div class="archive-article-date">
       
       <time class="my-post-time">
         <i class="icon icon-lg icon-file-text-o"></i>
         &nbsp;
-          03-14
+          2020-03-14
       </time>
     </div>
     <div class="archive-article-inner">
@@ -251,16 +318,14 @@
 
     </div>
   </article>
-
-    
-
-        <article class="archive-article" onclick="location.href='/posts/84c2c618/'">
+            
+                <article class="archive-article" onclick="location.href='/posts/84c2c618/'">
     <div class="archive-article-date">
       
       <time class="my-post-time">
         <i class="icon icon-lg icon-file-text-o"></i>
         &nbsp;
-          03-14
+          2020-03-14
       </time>
     </div>
     <div class="archive-article-inner">
@@ -281,16 +346,14 @@
 
     </div>
   </article>
-
-    
-
-        <article class="archive-article" onclick="location.href='/posts/37fb3230/'">
+            
+                <article class="archive-article" onclick="location.href='/posts/37fb3230/'">
     <div class="archive-article-date">
       
       <time class="my-post-time">
         <i class="icon icon-lg icon-file-text-o"></i>
         &nbsp;
-          03-14
+          2020-03-14
       </time>
     </div>
     <div class="archive-article-inner">
@@ -311,16 +374,14 @@
 
     </div>
   </article>
-
-    
-
-        <article class="archive-article" onclick="location.href='/posts/f7bf78f1/'">
+            
+                <article class="archive-article" onclick="location.href='/posts/f7bf78f1/'">
     <div class="archive-article-date">
       
       <time class="my-post-time">
         <i class="icon icon-lg icon-file-text-o"></i>
         &nbsp;
-          03-14
+          2020-03-14
       </time>
     </div>
     <div class="archive-article-inner">
@@ -341,16 +402,14 @@
 
     </div>
   </article>
-
-    
-
-        <article class="archive-article" onclick="location.href='/posts/6f4ade4f/'">
+            
+                <article class="archive-article" onclick="location.href='/posts/6f4ade4f/'">
     <div class="archive-article-date">
       
       <time class="my-post-time">
         <i class="icon icon-lg icon-file-text-o"></i>
         &nbsp;
-          03-14
+          2020-03-14
       </time>
     </div>
     <div class="archive-article-inner">
@@ -371,16 +430,14 @@
 
     </div>
   </article>
-
-    
-
-        <article class="archive-article" onclick="location.href='/posts/3dd860b8/'">
+            
+                <article class="archive-article" onclick="location.href='/posts/3dd860b8/'">
     <div class="archive-article-date">
       
       <time class="my-post-time">
         <i class="icon icon-lg icon-file-text-o"></i>
         &nbsp;
-          03-13
+          2020-03-13
       </time>
     </div>
     <div class="archive-article-inner">
@@ -401,16 +458,14 @@
 
     </div>
   </article>
-
-    
-
-        <article class="archive-article" onclick="location.href='/posts/f52403cb/'">
+            
+                <article class="archive-article" onclick="location.href='/posts/f52403cb/'">
     <div class="archive-article-date">
       
       <time class="my-post-time">
         <i class="icon icon-lg icon-file-text-o"></i>
         &nbsp;
-          03-13
+          2020-03-13
       </time>
     </div>
     <div class="archive-article-inner">
@@ -431,74 +486,13 @@
 
     </div>
   </article>
+            
+            </div>
+        
 
-    
-
-        <article class="archive-article" onclick="location.href='/posts/563a9848/'">
-    <div class="archive-article-date">
-      
-      <time class="my-post-time">
-        <i class="icon icon-lg icon-file-text-o"></i>
-        &nbsp;
-          03-13
-      </time>
-    </div>
-    <div class="archive-article-inner">
-      
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a href="/posts/563a9848/">Vue2.0 【第一季】第6节 v-model指令</a>
-    </h3>
-  
-
-
-
-      <br/>
-      
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-2-0/" rel="tag">vue 2.0</a></li></ul>
-
-    </div>
-  </article>
-
-    
-
-        <article class="archive-article" onclick="location.href='/posts/1d242cb0/'">
-    <div class="archive-article-date">
-      
-      <time class="my-post-time">
-        <i class="icon icon-lg icon-file-text-o"></i>
-        &nbsp;
-          03-13
-      </time>
-    </div>
-    <div class="archive-article-inner">
-      
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a href="/posts/1d242cb0/">Vue2.0 【第一季】第5节 v-0n：绑定事件监听器</a>
-    </h3>
-  
-
-
-
-      <br/>
-      
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue-2-0/" rel="tag">vue 2.0</a></li></ul>
-
-    </div>
-  </article>
-
-    
-    </div>
-
-    
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/archives/2020/page/2/">上一页</a><a class="page-number" href="/archives/2020/">1</a><a class="page-number" href="/archives/2020/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/2020/page/4/">4</a><a class="extend next" rel="next" href="/archives/2020/page/4/">下一页</a>
+    <a class="extend prev" rel="prev" href="/tags/vue-2-0/">上一页</a><a class="page-number" href="/tags/vue-2-0/">1</a><span class="page-number current">2</span><a class="page-number" href="/tags/vue-2-0/page/3/">3</a><a class="extend next" rel="next" href="/tags/vue-2-0/page/3/">下一页</a>
     </div>
 </nav>
 
